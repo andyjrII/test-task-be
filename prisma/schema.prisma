@@ -1,0 +1,34 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// schema.prisma
+
+// Define the Sector table
+model Sector {
+  id       Int     @id @default(autoincrement())
+  name     String
+  parent   Sector? @relation("Subcategories", fields: [parentId], references: [id])
+  parentId Int?
+
+  // Relationships
+  subcategories Sector[] @relation("Subcategories")
+  users         User[]   @relation("UserToSector")
+  // Add other fields related to sectors if needed
+}
+
+// Define the User table (unchanged from the previous example)
+model User {
+  id      Int      @id @default(autoincrement())
+  name    String
+  terms   Boolean
+  sectors Sector[] @relation("UserToSector")
+}
