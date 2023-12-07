@@ -1,5 +1,6 @@
 import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common';
 import { SectorsService } from './sectors.service';
+import { MySector } from './interfaces/sector.interface';
 
 @Controller('sectors')
 export class SectorsController {
@@ -7,7 +8,7 @@ export class SectorsController {
 
   @Get('all')
   @HttpCode(HttpStatus.OK)
-  async getSectors() {
+  async getSectors(): Promise<MySector[]> {
     return await this.sectorsService.getSectors();
   }
 }
