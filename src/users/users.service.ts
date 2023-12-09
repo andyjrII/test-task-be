@@ -33,7 +33,7 @@ export class UsersService {
         name: dto.name || undefined,
         terms: dto.terms || undefined,
         sectors: {
-          connect: dto.sectorIds.map((id) => ({ id: id || undefined })),
+          connect: dto.sectorIds.map((id) => ({ id })),
         },
       },
       include: {
