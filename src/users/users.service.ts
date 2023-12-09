@@ -32,10 +32,9 @@ export class UsersService {
       data: {
         name: dto.name || undefined,
         terms: dto.terms || undefined,
-        sectors:
-          {
-            connect: dto.sectorIds.map((id) => ({ id })),
-          } || undefined,
+        sectors: {
+          connect: dto.sectorIds.map((id) => ({ id: id || undefined })),
+        },
       },
       include: {
         sectors: true,
